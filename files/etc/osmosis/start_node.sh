@@ -4,7 +4,7 @@ set -e
 export GOPATH=/usr/local/go/bin
 export PATH=$GOPATH:/usr/local/go/bin:$PATH
 
-# bash /root/start_node.sh "15.0.0" "https://github.com/osmosis-labs/osmosis/raw/main/networks/osmosis-1/genesis.json" "https://snapshots.osmosis.zone/v15/latest.json" "https://snapshots.polkachu.com/addrbook/osmosis/addrbook.json" "mainnet"
+# bash /root/start_node.sh "15.1.0" "https://github.com/osmosis-labs/osmosis/raw/main/networks/osmosis-1/genesis.json" "https://snapshots.osmosis.zone/v15/latest.json" "https://snapshots.polkachu.com/addrbook/osmosis/addrbook.json" "mainnet"
 
 MONIKER=osmosis
 OSMOSIS_HOME=/root/.osmosisd
