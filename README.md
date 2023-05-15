@@ -1,43 +1,57 @@
-# Osmosis Droplet Image Creation
+# Digitalocean Marketplace Image
 
-This document will explain all the steps needed to create an Osmosis golden image through packer for distribtuion on the DigitalOcean Marketplace.
+This README provides instructions for creating an Osmosis golden image using Packer for distribution on the DigitalOcean Marketplace.
 
-First, you must create a personal access token on DigitalOcean. This is done by selecting "API" under "Manage" in the left-most navigation menu. Next, select "Generate New Token", add any token name, expiration, give read and write scopes, then select "Generate Token". You will then be presented with your token. Ensure you keep this token safe as it can not be shown again. At this point, export your token as an environment variable will the following (replaced with your token)
+## Prerequisites
 
+### DigitalOcean Account
+
+Before proceeding, make sure you have a DigitalOcean account and create a personal access token. Follow these steps:
+
+1. Log in to your DigitalOcean account and go to the "Manage" section in the left-most navigation menu.
+2. Select "API" and then click on "Generate New Token".
+3. Provide a token name, expiration, and give read and write scopes.
+4. Click on "Generate Token" to create the token.
+5. Once generated, make sure to copy and securely store the token. It will not be shown again.
+6. Export the token as an environment variable by running the following command in your terminal, replacing `your_token` with the actual token:
+
+```bash
+export DIGITALOCEAN_TOKEN=your_token
 ```
-export DIGITALOCEAN_TOKEN=dop_v1_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-```
 
-Next, clone this repo and move inside of it:
+### Packer
 
-```
-cd $HOME
-git clone https://github.com/czarcas7ic/osmosis-packer.git
-cd $HOME/osmosis-packer
-```
+If you do not already have packer installed you can install it with `brew`:
 
-If you do not already have packer installed, do so with the following:
-
-Mac
-```
+```bash
 brew install packer
 ```
 
-Ubuntu
-```
+or with `apt` on Ubuntu:
+
+```bash
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 sudo apt-get update && sudo apt-get install packer
 ```
 
-There should be only one variable that needs to get changed for each release and that is the "application_version" under "variables" in the marketplace-image.json. For example, if this value says "v7.2.0", it will pull and build the "v7.2.0" tag from the osmosis repo. If in the future an external dependency changes (lets say we move from go 1.17 to 1.18), this can be modified in the "01-osmosis.sh" file under the "scripts" folder.
+## Updating the Image
 
-Once the value has been changed to the next version and you have your DIGITALOCEAN_TOKEN exported as you did earlier, the following command will spin up a node, install dependencies, clean and prep for a snapshot to be taken, power down the VM, take a snapshot, then remove the VM:
+To update the image, you'll typically need to change the `application_version` variable in the `marketplace-image.json` file. Follow these steps:
 
-```
+1. Open the `marketplace-image.json` file.
+2. Locate the `variables` section and find the `application_version` variable.
+3. Update the value to the desired version (e.g., "v7.2.0").
+4. If any external dependencies change in the future (e.g., upgrading from Go 1.17 to 1.18), modify the relevant code in the `01-osmosis.sh` file located in the `scripts/` folder.
+
+After making these changes and ensuring that the `DIGITALOCEAN_TOKEN` environment variable is set, you can build the image using the following command:
+
+```bash
 packer build marketplace-image.json
 ```
 
-Once complete (usually 10-15 minutes) you will see a success message in your terminal as well as your final image in "Images" under the "Manage" section in the left-most menu on the DigitalOcean website.
+The above command will spin up a node, install dependencies, clean and prepare for a snapshot, power down the VM, take a snapshot, and then remove the VM.
 
-This image can then be used to submit to the Marketplace through the vendor portal!
+Once the process is complete (usually within 10-15 minutes), you will see a success message in your terminal. Additionally, you can find the final image under the "Images" section in the "Manage" menu on the DigitalOcean website.
+
+You can now use this image to submit to the Marketplace through the vendor portal.
