@@ -9,7 +9,12 @@ echo "$(tput setaf 2) ██████╗ ███████╗███╗
 $(tput sgr0)
 
 For documentation visit: http://docs.osmosis.zone/
-For web app: https://app.osmosis.zone/
+
+To sync this node on mainnet run: 
+    /root/join_mainnet.sh
+
+For other setups, please run osmosis installer:
+    source <(curl -sL https://get.osmosis.zone/run)
 
 To delete startup message: rm -rf $(readlink -f ${0})
 

@@ -63,5 +63,6 @@ Once the process is complete (usually within 10-15 minutes), you will see a succ
 
 You can now use this image to submit to the Marketplace through the vendor portal.
 
-## Gotchas
+## Resources
 
+- https://github.com/pachadotdev/rstudio-server-droplet

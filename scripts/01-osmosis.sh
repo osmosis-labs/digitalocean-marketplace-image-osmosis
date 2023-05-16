@@ -1,25 +1,36 @@
 #!/bin/sh
 
-export GO_VERSION=1.19.7
-apt-get update
-apt-get install -y wget git gcc
-wget https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz
-tar -C /usr/local -xzf "go${GO_VERSION}.linux-amd64.tar.gz"
-rm "go${GO_VERSION}.linux-amd64.tar.gz"
-export PATH=/usr/local/go/bin:$PATH
-echo "export PATH=/usr/local/go/bin:$PATH" >> /root/.bashrc
-go version
-git clone https://github.com/osmosis-labs/osmosis
-cd osmosis/
-git checkout $application_version
-make install
-/root/go/bin/osmosisd version
-cp /root/go/bin/osmosisd /usr/bin/osmosisd
-chmod a+x /usr/bin/osmosisd
-osmosisd version
+MONIKER=osmosis
+OSMOSIS_VERSION=v15.1,0
+GENESIS_URL=https://github.com/osmosis-labs/osmosis/raw/main/networks/osmosis-1/genesis.json
 
-echo '$HOME/startup.sh' >> ~/.bashrc
-cd $HOME
-chmod +x $HOME/99-one-click-osmosis
-chmod +x $HOME/startup.sh
-mv $HOME/99-one-click-osmosis /etc/update-motd.d/
+# Add a swap file 
+fallocate -l 32G /swapfile
+mkswap /swapfile
+swapon /swapfile
+echo '/swapfile none swap sw 0 0' >> /etc/fstab
+
+# Update /etc/security/limits.conf 
+NR_OPEN=$(cat /proc/sys/fs/nr_open)
+echo "* soft nofile $NR_OPEN" >> /etc/security/limits.conf
+echo "* hard nofile $NR_OPEN" >> /etc/security/limits.conf
+
+# Enable pam_limits in /etc/pam.d/common-session
+echo "session required pam_limits.so" >> /etc/pam.d/common-session
+
+# Enable ufw
+echo "y" | ufw enable
+ufw allow http
+ufw allow https
+ufw allow ssh
+ufw allow 26656 # p2p
+ufw allow 26657 # rpc
+ufw allow 1317  # rest
+ufw allow 9090  # grpc
+
+# Download osmosisd binary
+wget -q https://github.com/osmosis-labs/osmosis/releases/download/v$OSMOSIS_VERSION/osmosisd-$OSMOSIS_VERSION-linux-amd64 -O /usr/local/bin/osmosisd
+chmod +x /usr/local/bin/osmosisd
+
+# Download mainnet genesis
+wget https://github.com/osmosis-labs/osmosis/raw/main/networks/osmosis-1/genesis.json -O /etc/osmosis/genesis.json
