@@ -1,19 +1,21 @@
 {
   "variables": {
     "do_token": "{{env `DIGITALOCEAN_TOKEN`}}",
-    "image_name": "osmosis-20-04-{{user `application_version`}}-{{timestamp}}",
+    "image_name": "osmosis-ubuntu-22-04-{{timestamp}}",
     "application_name": "osmosis",
-    "application_version": "v15.1.0"
+    "application_version": "v15.1.0",
+    "apt_packages": "git build-essential curl jq snapd"
   },
   "sensitive-variables": ["do_token"],
   "builders": [
     {
       "type": "digitalocean",
       "api_token": "{{user `do_token`}}",
-      "image": "ubuntu-20-04-x64",
-      "region": "nyc3",
+      "image": "ubuntu-22-04-x64",
+      "region": "fra1",
       "size": "s-1vcpu-1gb",
       "ssh_username": "root",
+      "temporary_key_pair_type": "ed25519",
       "snapshot_name": "{{user `image_name`}}"
     }
   ],
@@ -27,22 +29,14 @@
     {
       "type": "file",
       "source": "files/etc/osmosis/",
-      "destination": "/root/"
+      "destination": "/etc/osmosis"
     },
     {
       "type": "shell",
-      "environment_vars": [
-        "DEBIAN_FRONTEND=noninteractive",
-        "LC_ALL=C",
-        "LANG=en_US.UTF-8",
-        "LC_CTYPE=en_US.UTF-8"
-      ],
       "inline": [
-        "apt-get clean",
-        "apt-get update",
-        "apt-get -y upgrade",
-        "sudo apt-get dist-upgrade -y",
-        "apt install git build-essential curl jq snapd --yes"
+        "apt -qqy update",
+        "apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' full-upgrade",
+        "apt -qqy -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold' install {{user `apt_packages`}}"
       ]
     },
     {
