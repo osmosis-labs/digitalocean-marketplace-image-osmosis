@@ -11,6 +11,7 @@ OSMOSIS_HOME=/root/.osmosisd
 OSMOSIS_VERSION="15.1.0"
 SNAPSHOT_URL=$(curl -s https://snapshots.osmosis.zone/v15/latest.json)
 ADDRBOOK_URL="https://snapshots.polkachu.com/addrbook/osmosis/addrbook.json"
+GENESIS_URL=https://github.com/osmosis-labs/osmosis/raw/main/networks/osmosis-1/genesis.json
 
 # Check if the binary already exists
 if [ -x "$osmosis_binary" ]; then
@@ -41,7 +42,7 @@ cp /etc/osmosis/config.toml $OSMOSIS_HOME/config.toml
 cp /etc/osmosis/app.toml $OSMOSIS_HOME/app.toml
 
 # Copy genesis
-cp /etc/osmosis/genesis.json $OSMOSIS_HOME/config/genesis.json
+wget -q $GENESIS_URL -O $OSMOSIS_HOME/config/genesis.json
 
 # Download addrbook
 wget -q $ADDRBOOK_URL -O $OSMOSIS_HOME/config/addrbook.json

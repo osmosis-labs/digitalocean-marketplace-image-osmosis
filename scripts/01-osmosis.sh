@@ -2,13 +2,6 @@
 
 MONIKER=osmosis
 OSMOSIS_VERSION=v15.1,0
-GENESIS_URL=https://github.com/osmosis-labs/osmosis/raw/main/networks/osmosis-1/genesis.json
-
-# Add a swap file 
-fallocate -l 32G /swapfile
-mkswap /swapfile
-swapon /swapfile
-echo '/swapfile none swap sw 0 0' >> /etc/fstab
 
 # Update /etc/security/limits.conf 
 NR_OPEN=$(cat /proc/sys/fs/nr_open)
