@@ -21,6 +21,13 @@ export DIGITALOCEAN_TOKEN=your_token
 
 ### Packer
 
+> **⚠️ Note:**
+>
+> You need to use packer version 1.7.10 to build the image
+> It won't work with any 1.8.x version
+>
+> Select the correct version from the [releases page](https://developer.hashicorp.com/packer/downloads)
+
 If you do not already have packer installed you can install it with `brew`:
 
 ```bash
@@ -55,3 +62,6 @@ The above command will spin up a node, install dependencies, clean and prepare f
 Once the process is complete (usually within 10-15 minutes), you will see a success message in your terminal. Additionally, you can find the final image under the "Images" section in the "Manage" menu on the DigitalOcean website.
 
 You can now use this image to submit to the Marketplace through the vendor portal.
+
+## Gotchas
+
