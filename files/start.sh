@@ -3,21 +3,24 @@ set -e
 
 MONIKER=osmosis
 OSMOSIS_HOME=/root/.osmosisd
-VERSION="15.1.0"
 
-MAINNET_BINARY_URL="https://github.com/osmosis-labs/osmosis/releases/download/v$VERSION/osmosisd-$VERSION-linux-amd64"
+
+MAINNET_VERSION="15.1.0"
+MAINNET_BINARY_URL="https://github.com/osmosis-labs/osmosis/releases/download/v$MAINNET_VERSION/osmosisd-$MAINNET_VERSION-linux-amd64"
 MAINNET_SNAPSHOT_URL=$(curl -s https://snapshots.osmosis.zone/v15/latest.json)
 MAINNET_ADDRBOOK_URL="https://snapshots.polkachu.com/addrbook/osmosis/addrbook.json"
 MAINNET_GENESIS_URL=https://github.com/osmosis-labs/osmosis/raw/main/networks/osmosis-1/genesis.json
 
-TESTNET_BINARY_URL="https://osmosis-snapshots-testnet.fra1.cdn.digitaloceanspaces.com/binaries/osmosisd-$VERSION-linux-amd64"
-TESTNET_SNAPSHOT_URL=$(curl -s https://snapshots.osmotest5.osmosis.zone/latest)
+TESTNET_VERSION="15.1.0-testnet"
+TESTNET_BINARY_URL="https://osmosis-snapshots-testnet.fra1.cdn.digitaloceanspaces.com/binaries/osmosisd-$TESTNET_VERSION-linux-amd64"
+TESTNET_SNAPSHOT_URL=$(curl -sL https://snapshots.osmotest5.osmosis.zone/latest)
 TESTNET_ADDRBOOK_URL="https://addrbook.osmotest5.osmosis.zone"
 TESTNET_GENESIS_URL="https://genesis.osmotest5.osmosis.zone/genesis.json"
 
 # Set mainnet as default
 CHAIN_ID=${1:-osmosis-1}
 
+VERSION=$MAINNET_VERSION
 BINARY_URL=$MAINNET_BINARY_URL
 SNAPSHOT_URL=$MAINNET_SNAPSHOT_URL
 ADDRBOOK_URL=$MAINNET_ADDRBOOK_URL
@@ -38,6 +41,7 @@ case "$CHAIN_ID" in
         SNAPSHOT_URL=$TESTNET_SNAPSHOT_URL
         ADDRBOOK_URL=$TESTNET_ADDRBOOK_URL
         GENESIS_URL=$TESTNET_GENESIS_URL
+        VERSION=$TESTNET_VERSION
         ;;
     *)
         echo "Invalid Chain ID. Acceptable values are 'osmosis-1' and 'osmo-test-5'."
@@ -140,7 +144,7 @@ if ! ps -p $PID > /dev/null; then
 fi
 done
 
-echo -e "\n\n✅ Osmosis node has started successfully. (PID: $PURPLE$PID$RESET)\n\n"
+echo -e "\n\n✅ Osmosis node has started successfully. (PID: $PURPLE$PID$RESET)\n"
 
 echo "-------------------------------------------------"
 echo -e 🔍 Run$YELLOW osmosisd status$RESET to check sync status.

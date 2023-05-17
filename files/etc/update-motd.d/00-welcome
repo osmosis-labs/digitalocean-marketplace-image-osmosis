@@ -11,8 +11,7 @@ ${PURPLE}
 ██║   ██║╚════██║██║╚██╔╝██║██║   ██║╚════██║██║╚════██║
 ╚██████╔╝███████║██║ ╚═╝ ██║╚██████╔╝███████║██║███████║
  ╚═════╝ ╚══════╝╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝╚══════╝
- ${RESET}
-For documentation visit: ${PURPLE}http://docs.osmosis.zone/ ${RESET}
+${RESET}
 
 To sync this node on mainnet run: 
     ${PURPLE}/root/start.sh ${RESET}
@@ -23,6 +22,9 @@ To sync this node on testnet run:
 For all other setups, please run osmosis installer:
     ${PURPLE}source <(curl -sL https://get.osmosis.zone/run) ${RESET}
 
-********************************************************************************
+Additonal Docs: 
+    ${PURPLE}http://docs.osmosis.zone/ ${RESET}
+
 To delete this message: rm -rf $(readlink -f ${0})
+********************************************************************************
 "
