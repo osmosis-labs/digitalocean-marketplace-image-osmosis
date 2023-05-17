@@ -1,7 +1,11 @@
 #!/bin/sh
 
 MONIKER=osmosis
-OSMOSIS_VERSION=v15.1,0
+
+MAINNET_VERSION="15.1.0"
+MAINNET_BINARY_URL="https://github.com/osmosis-labs/osmosis/releases/download/v$MAINNET_VERSION/osmosisd-$MAINNET_VERSION-linux-amd64"
+TESTNET_VERSION="15.1.0-testnet"
+TESTNET_BINARY_URL="https://osmosis-snapshots-testnet.fra1.cdn.digitaloceanspaces.com/binaries/osmosisd-$TESTNET_VERSION-linux-amd64"
 
 # Update /etc/security/limits.conf 
 NR_OPEN=$(cat /proc/sys/fs/nr_open)
@@ -21,9 +25,19 @@ ufw allow 26657 # rpc
 ufw allow 1317  # rest
 ufw allow 9090  # grpc
 
-# Download osmosisd binary
-wget -q https://github.com/osmosis-labs/osmosis/releases/download/v$OSMOSIS_VERSION/osmosisd-$OSMOSIS_VERSION-linux-amd64 -O /usr/local/bin/osmosisd
-chmod +x /usr/local/bin/osmosisd
+# Enables colors
+sed -i 's/xterm-color)/xterm-color|\*-256color)/g' /root/.bashrc
 
-# Download mainnet genesis
-wget https://github.com/osmosis-labs/osmosis/raw/main/networks/osmosis-1/genesis.json -O /etc/osmosis/genesis.json
+# Download mainnet osmosisd binary
+wget -q $MAINNET_BINARY_URL -O /usr/local/bin/osmosisd-$MAINNET_VERSION
+chmod +x /usr/local/bin/osmosisd-$MAINNET_VERSION
+
+# Download testnet osmosisd binary
+wget -q $TESTNET_BINARY_URL -O /usr/local/bin/osmosisd-$TESTNET_VERSION
+chmod +x /usr/local/bin/osmosisd-$TESTNET_VERSION
+
+# Set mainnet osmosisd as default binary
+ln -s /usr/local/bin/osmosisd /usr/local/bin/osmosisd-$MAINNET_VERSION
+
+# Set scripts as executable
+chmod +x /root/start.sh

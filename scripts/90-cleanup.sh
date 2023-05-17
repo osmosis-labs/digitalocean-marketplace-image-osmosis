@@ -33,8 +33,6 @@ find /var/log -mtime -1 -type f -exec truncate -s 0 {} \;
 rm -rf /var/log/*.gz /var/log/*.[0-9] /var/log/*-????????
 rm -rf /var/lib/cloud/instances/*
 rm -f /root/.ssh/authorized_keys /etc/ssh/*key*
-cat /dev/null > /var/log/kern.log
-cat /dev/null > /var/log/auth.log
 touch /etc/ssh/revoked_keys
 chmod 600 /etc/ssh/revoked_keys
 
@@ -49,3 +47,12 @@ The secure erase will complete successfully when you see:${NC}
 Beginning secure erase now\n"
 
 dd if=/dev/zero of=/zerofile bs=4096 || rm /zerofile
+
+# Uninstall the agent and remove the DO directory: 
+sudo apt-get purge droplet-agent -y
+
+# Remove un-cleared log file from warnings
+rm -f /var/log/auth.log
+rm -f /var/log/kern.log
+rm -f /var/log/ubuntu-advantage.log
+rm -f /var/log/dpkg.log

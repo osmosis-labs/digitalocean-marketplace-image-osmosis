@@ -1,22 +1,30 @@
 #!/bin/sh
-export TERM=xterm-256color
-echo "$(tput setaf 2) ██████╗ ███████╗███╗   ███╗ ██████╗ ███████╗██╗███████╗
+
+PURPLE=$'\e[1;35m'
+RESET=$'\e[0m'\
+
+cat <<EOF
+********************************************************************************
+
+${PURPLE}
+ ██████╗ ███████╗███╗   ███╗ ██████╗ ███████╗██╗███████╗
 ██╔═══██╗██╔════╝████╗ ████║██╔═══██╗██╔════╝██║██╔════╝
 ██║   ██║███████╗██╔████╔██║██║   ██║███████╗██║███████╗
 ██║   ██║╚════██║██║╚██╔╝██║██║   ██║╚════██║██║╚════██║
 ╚██████╔╝███████║██║ ╚═╝ ██║╚██████╔╝███████║██║███████║
  ╚═════╝ ╚══════╝╚═╝     ╚═╝ ╚═════╝ ╚══════╝╚═╝╚══════╝
-$(tput sgr0)
-
-For documentation visit: http://docs.osmosis.zone/
+ ${RESET}
+For documentation visit: ${PURPLE}http://docs.osmosis.zone/ ${RESET}
 
 To sync this node on mainnet run: 
-    /root/join_mainnet.sh
+    ${PURPLE}/root/start.sh ${RESET}
 
-For other setups, please run osmosis installer:
-    source <(curl -sL https://get.osmosis.zone/run)
+To sync this node on testnet run: 
+    ${PURPLE}/root/start.sh osmo-test-5 ${RESET}
 
-To delete startup message: rm -rf $(readlink -f ${0})
+For all other setups, please run osmosis installer:
+    ${PURPLE}source <(curl -sL https://get.osmosis.zone/run) ${RESET}
 
 ********************************************************************************
-"
+To delete this message: rm -rf $(readlink -f ${0})
+EOF
