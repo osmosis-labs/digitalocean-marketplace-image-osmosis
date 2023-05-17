@@ -37,7 +37,7 @@ wget -q $TESTNET_BINARY_URL -O /usr/local/bin/osmosisd-$TESTNET_VERSION
 chmod +x /usr/local/bin/osmosisd-$TESTNET_VERSION
 
 # Set mainnet osmosisd as default binary
-ln -s /usr/local/bin/osmosisd /usr/local/bin/osmosisd-$MAINNET_VERSION
+ln -sf /usr/local/bin/osmosisd /usr/local/bin/osmosisd-$MAINNET_VERSION
 
 # Set scripts as executable
 chmod +x /root/start.sh

@@ -63,7 +63,7 @@ if pgrep -f "osmosisd start" >/dev/null; then
 fi
 
 echo -e "\n$YELLOW📜 Checking that /usr/local/bin/osmosisd-$VERSION exists$RESET"
-if [ ! -f /usr/local/bin/osmosisd-$VERSION ] || [[ "$(/usr/local/bin/osmosisd-$VERSION version 2>&1)" != $VERSION ]]; then
+if [ ! -f /usr/local/bin/osmosisd-$VERSION ] || [[ "$(/usr/local/bin/osmosisd-$VERSION version --home /tmp/.osmosisd 2>&1)" != $VERSION ]]; then
     echo "🔽 Downloading Osmosis binary from BINARY_URL..."
     wget $BINARY_URL -O /usr/local/bin/osmosisd-$VERSION 
     chmod +x /usr/local/bin/osmosisd-$VERSION
