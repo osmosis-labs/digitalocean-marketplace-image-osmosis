@@ -23,7 +23,8 @@
     {
       "type": "shell",
       "inline": [
-        "cloud-init status --wait"
+        "cloud-init status --wait",
+        "rm -f /etc/update-motd.d/*"
       ]
     },
     {
