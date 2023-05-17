@@ -140,11 +140,10 @@ if ! ps -p $PID > /dev/null; then
 fi
 done
 
-echo -e "\n\n✅ Osmosis node has started successfully. (PID: $PURPLE$PID$RESET)\n"
+echo -e "\n\n✅ Osmosis node has started successfully. (PID: $PURPLE$PID$RESET)\n\n"
 
-echo "\n-------------------------------------------------"
+echo "-------------------------------------------------"
 echo -e 🔍 Run$YELLOW osmosisd status$RESET to check sync status.
 echo -e 📄 Check logs with$YELLOW tail -f /root/osmosisd.log$RESET
 echo -e 🛑 Stop node with$YELLOW kill $PID$RESET
 echo "-------------------------------------------------"
-
