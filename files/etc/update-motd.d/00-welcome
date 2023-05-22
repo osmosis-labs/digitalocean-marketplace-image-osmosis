@@ -14,10 +14,10 @@ ${PURPLE}
 ${RESET}
 
 To sync this node on mainnet run: 
-    ${PURPLE}/root/start.sh ${RESET}
+    ${PURPLE}/root/join.sh ${RESET}
 
 To sync this node on testnet run: 
-    ${PURPLE}/root/start.sh osmo-test-5 ${RESET}
+    ${PURPLE}/root/join.sh osmo-test-5 ${RESET}
 
 For all other setups, please run osmosis installer:
     ${PURPLE}source <(curl -sL https://get.osmosis.zone/run) ${RESET}

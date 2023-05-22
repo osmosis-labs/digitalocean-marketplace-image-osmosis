@@ -51,8 +51,5 @@ dd if=/dev/zero of=/zerofile bs=4096 || rm /zerofile
 # Uninstall the agent and remove the DO directory: 
 sudo apt-get purge droplet-agent -y
 
-# Remove un-cleared log file from warnings
-rm -f /var/log/auth.log
-rm -f /var/log/kern.log
-rm -f /var/log/ubuntu-advantage.log
-rm -f /var/log/dpkg.log
+# Remove un-cleared logs
+rm -f /var/log/*.log

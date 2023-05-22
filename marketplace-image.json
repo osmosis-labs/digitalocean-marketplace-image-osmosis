@@ -34,8 +34,8 @@
     },
     {
       "type": "file",
-      "source": "files/start.sh",
-      "destination": "/root/start.sh"
+      "source": "files/join.sh",
+      "destination": "/root/join.sh"
     },
     {
       "type": "shell",
