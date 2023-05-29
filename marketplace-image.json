@@ -1,9 +1,9 @@
 {
   "variables": {
     "do_token": "{{env `DIGITALOCEAN_TOKEN`}}",
-    "image_name": "osmosis-v15.1.0-ubuntu-22-04-{{timestamp}}",
+    "image_name": "osmosis-v15.1.2-ubuntu-22-04-{{timestamp}}",
     "application_name": "osmosis",
-    "application_version": "v15.1.0",
+    "application_version": "v15.1.2",
     "apt_packages": "git build-essential curl jq ca-certificates aria2 lz4"
   },
   "sensitive-variables": ["do_token"],
