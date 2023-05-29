@@ -5,7 +5,7 @@ MONIKER=osmosis
 OSMOSIS_HOME=/root/.osmosisd
 
 
-MAINNET_VERSION="15.1.0"
+MAINNET_VERSION="15.1.2"
 MAINNET_BINARY_URL="https://github.com/osmosis-labs/osmosis/releases/download/v$MAINNET_VERSION/osmosisd-$MAINNET_VERSION-linux-amd64"
 MAINNET_SNAPSHOT_URL=$(curl -s https://snapshots.osmosis.zone/v15/latest.json)
 MAINNET_ADDRBOOK_URL="https://snapshots.polkachu.com/addrbook/osmosis/addrbook.json"
