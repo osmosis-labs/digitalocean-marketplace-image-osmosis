@@ -12,7 +12,7 @@ keyring-backend = "os"
 # CLI output format (text|json)
 output = "text"
 # <host>:<port> to Tendermint RPC interface for this chain
-node = "tcp://localhost:26657"
+node = "https://rpc.osmosis.zone:443"
 # Transaction broadcasting mode (sync|async|block)
 broadcast-mode = "sync"
 # Concurrency defines if node queries should be done in parallel.
