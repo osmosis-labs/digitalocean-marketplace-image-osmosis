@@ -2,9 +2,9 @@
 
 MONIKER=osmosis
 
-MAINNET_VERSION="15.2.0"
+MAINNET_VERSION="19.2.0"
 MAINNET_BINARY_URL="https://github.com/osmosis-labs/osmosis/releases/download/v$MAINNET_VERSION/osmosisd-$MAINNET_VERSION-linux-amd64"
-TESTNET_VERSION="15.1.0-testnet"
+TESTNET_VERSION="19.0.0-rc0"
 TESTNET_BINARY_URL="https://osmosis-snapshots-testnet.fra1.cdn.digitaloceanspaces.com/binaries/osmosisd-$TESTNET_VERSION-linux-amd64"
 
 # Update /etc/security/limits.conf 
