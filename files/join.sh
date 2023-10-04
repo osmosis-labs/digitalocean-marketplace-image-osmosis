@@ -6,11 +6,11 @@ OSMOSIS_HOME=/root/.osmosisd
 
 MAINNET_VERSION="19.2.0"
 MAINNET_BINARY_URL="https://github.com/osmosis-labs/osmosis/releases/download/v$MAINNET_VERSION/osmosisd-$MAINNET_VERSION-linux-amd64"
-MAINNET_SNAPSHOT_URL=$(curl -s https://snapshots.osmosis.zone/v15/latest.json)
+MAINNET_SNAPSHOT_URL=$(curl -sL https://snapshots.osmosis.zone/latest)
 MAINNET_ADDRBOOK_URL="https://rpc.osmosis.zone/addrbook"
 MAINNET_GENESIS_URL=https://github.com/osmosis-labs/osmosis/raw/main/networks/osmosis-1/genesis.json
 
-TESTNET_VERSION="19.0.0-rc0"
+TESTNET_VERSION="19.2.0"
 TESTNET_BINARY_URL="https://osmosis-snapshots-testnet.fra1.cdn.digitaloceanspaces.com/binaries/osmosisd-$TESTNET_VERSION-linux-amd64"
 TESTNET_SNAPSHOT_URL=$(curl -sL https://snapshots.testnet.osmosis.zone/latest)
 TESTNET_ADDRBOOK_URL="https://rpc.testnet.osmosis.zone/addrbook"
